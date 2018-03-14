@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TodosService} from '../providers/todos.service';
 import { Todo } from '../model/todo';
+import { Servicio } from '../model/servicio';
 
 @Component({
   selector: 'app-casas',
@@ -57,6 +58,7 @@ export class CasasComponent implements OnInit {
         todo.foto = el.foto;
         todo.alquiler = el.alquiler;
         todo.direccion = el.direccion;
+        todo.servicios = el.servicios;
         
 
         this.todos.push(todo);
