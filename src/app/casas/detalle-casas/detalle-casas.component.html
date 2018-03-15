@@ -8,29 +8,15 @@
           <span class="glyphicon glyphicon glyphicon-home" aria-hidden="true"></span><span>Habitaciones: {{c.habitaciones}}</span>
           <hr>
           <span>Servicios:</span>
-          <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="tv" id="tv">
-              <label class="form-check-label" for="defaultCheck1">
-                TV
-              </label>
-              <input class="form-check-input" type="checkbox" value="wc" id="wc">
-              <label class="form-check-label" for="defaultCheck2">
-               WC
-              </label>
-          </div>
-          <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="cocina" id="cocina">
-                <label class="form-check-label" for="defaultCheck1">
-                  Cocina
-                </label>
-                <input class="form-check-input" type="checkbox" value="jardin" id="jardin">
-                <label class="form-check-label" for="defaultCheck2">
-                  Jardín
-                </label>
-          </div>
 
-          <li *ngFor="let servicio of todos.servicios"></li>
-          
+          <ul>
+            <li *ngFor="let servicio of c.servicios">
+              <input type="checkbox" [checked]="servicio.disponible"> {{servicio.nombre}}
+            </li>
+          </ul>
+        
+
+         
         </div>
       </div>
   </div>

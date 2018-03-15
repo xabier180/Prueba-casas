@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Todo } from '../model/todo';
+import { Casa } from '../model/casa';
 
 @Pipe({
   name: 'filter'
@@ -7,20 +7,25 @@ import { Todo } from '../model/todo';
 export class FilterPipe implements PipeTransform {
 
  /**
-  * Filtro para buscar en una coleccion de coches. No es CaseSensitive
-  * @param todos : Todo[]
+  * Filtro para buscar en una coleccion de casas. No es CaseSensitive
+  * @param casas : Casa[]
   * @param searchText : string con la marca o modelo del coche
   */
 
-  transform(todos: Todo[], searchText: string): Todo[] {
+  transform(casas: Casa[], searchText: string, ckAlquiler: boolean, ckVenta: boolean): Casa[] {
 
-    if(!todos) return [];
-    if(!searchText) return todos;
+    if(!casas) return [];
+    if(!searchText) return casas;
+
+   
+
+
+    //Filtro por nombre o direccion
     searchText = searchText.toLowerCase();
-    let nombrePrecio = "";
-    return todos.filter( todoIt => {
-        nombrePrecio =  todoIt.nombre + " " +  todoIt.precio;
-        return nombrePrecio.toLowerCase().includes(searchText);
+    let nombreDireccion = "";
+    return casas.filter( todoIt => {
+        nombreDireccion =  todoIt.nombre + " " +  todoIt.direccion;
+        return nombreDireccion.toLowerCase().includes(searchText);
     });
    }
 

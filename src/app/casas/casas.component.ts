@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TodosService} from '../providers/todos.service';
-import { Todo } from '../model/todo';
+import { Casa } from '../model/casa';
 import { Servicio } from '../model/servicio';
 
 @Component({
@@ -10,9 +10,9 @@ import { Servicio } from '../model/servicio';
 })
 export class CasasComponent implements OnInit {
 
-  todos: Todo[];
+  casas: Casa[];
   nombre: string;
-  casa_seleccionada: Todo;
+  casa_seleccionada: Casa;
   nuevaTarea : string;
 
   constructor(public todosService:TodosService) {
@@ -20,8 +20,8 @@ export class CasasComponent implements OnInit {
 
     console.log('CasasComponent constructor');
 
-      this.casa_seleccionada = new Todo('casa_seleccionada');
-      this.todos = [];
+      this.casa_seleccionada = new Casa('casa_seleccionada');
+      this.casas = [];
    }
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class CasasComponent implements OnInit {
 
   cargarCasas(){
     console.log('CasasComponent cargarCasas');
-    this.todos = [];
+    this.casas = [];
     this.todosService.getTodos().subscribe(
       resultado => {
         console.debug('peticion correcta %o', resultado);
@@ -49,24 +49,30 @@ export class CasasComponent implements OnInit {
    */
   mapeo( result : any ){
 
-    let todo:Todo;
+    let casa:Casa, s:Servicio;
     result.forEach(el => {
-        todo = new Todo( el.title );
-        todo.nombre = el.nombre;
-        todo.precio = el.precio;
-        todo.habitaciones = el.habitaciones;
-        todo.foto = el.foto;
-        todo.alquiler = el.alquiler;
-        todo.direccion = el.direccion;
-        todo.servicios = el.servicios;
+        casa = new Casa( el.title );
+        casa.nombre = el.nombre;
+        casa.precio = el.precio;
+        casa.habitaciones = el.habitaciones;
+        casa.foto = el.foto;
+        casa.alquiler = el.alquiler;
+        casa.direccion = el.direccion;
+        casa.servicios = el.servicios;
         
+       /* el.servicios.forEach( el => {
+          s = new Servicio(  );
+          s.nombre = el.servicios.nombre;
+          casa.servicios.push(s);
+        }
+      ) */
 
-        this.todos.push(todo);
+        this.casas.push(casa);
     });
 
   }
 
-  seleccionarCasa(casa:Todo){
+  seleccionarCasa(casa:Casa){
     console.log('CasasComponent: seleccionarCasa %o', casa);               
   
     this.casa_seleccionada = casa;   
@@ -87,10 +93,10 @@ export class CasasComponent implements OnInit {
 
 */
 
-  delete(todo:Todo){
-    console.log('UnoComponent delete %o', todo );
+  delete(casa:Casa){
+    console.log('UnoComponent delete %o', casa );
 
-    this.todosService.delete(todo.nombre).subscribe(
+    this.todosService.delete(casa.nombre).subscribe(
       result=>{
         this.cargarCasas();
       },
@@ -102,13 +108,13 @@ export class CasasComponent implements OnInit {
 
   new(){
     console.log('UnoComponent new ');
-    let todo = new Todo(this.nuevaTarea);
+    let casa = new Casa(this.nuevaTarea);
     /*
     let todo = new Todo(this.nuevaTarea);
     this.todos.unshift(todo);
     this.nuevaTarea = "";
     */
-    this.todosService.post(todo).subscribe(
+    this.todosService.post(casa).subscribe(
       result=>{
         console.log('UnoComponent new %o', result);
         this.cargarCasas();

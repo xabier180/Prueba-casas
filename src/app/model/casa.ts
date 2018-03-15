@@ -1,6 +1,6 @@
 import {Servicio} from './servicio'
 
-export class Todo{
+export class Casa{
 
     nombre : string;
     precio : number;

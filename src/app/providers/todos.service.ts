@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Todo } from '../model/todo';
+import { Casa } from '../model/casa';
 import { GLOBAL } from '../global';
 
 const END_POINT = "http://localhost:3000";
@@ -30,15 +30,15 @@ export class TodosService {
     return this.http.delete(url);
   }
 
-post(todo:Todo){
+post(casa:Casa){
     let url = END_POINT + '/todos/';
     console.log(`TodosService put ${url}`);
 
     let body = {
                   // "id": todo.id,
-                  "nombre": todo.nombre,
-                  "precio": todo.precio,
-                  "alquiler": todo.alquiler    
+                  "nombre": casa.nombre,
+                  "precio": casa.precio,
+                  "alquiler": casa.alquiler    
                 } 
               
     const httpOptions = {
